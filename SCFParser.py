@@ -82,5 +82,8 @@ def parse_tlv(tlv_file):
                 bytes_read = f.read(1)
                 bytes_index += 1
 
+        #right now we just print the header data. we can further process this later
+        print(header_data_dict)
+
 if __name__ == "__main__":
     parse_tlv(sys.argv[1])

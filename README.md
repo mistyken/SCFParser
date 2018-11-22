@@ -1,2 +1,2 @@
 # SCFParser
-SCFParser take a tlv file and parse it
+SCFParser take a tlv file(binary) and parse it

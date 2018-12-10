@@ -4,25 +4,79 @@ import copy
 
 
 def parse_tlv(tlv_file):
-    bm_type_header_no_data = [bytes(b'\x03'), bytes(b'\x07'), bytes(b'\x09'), bytes(b'\x0a'),
-                              bytes(b'\x0b')]
-    bm_type_header_with_data = [bytes(b'\x01'), bytes(b'\x02'), bytes(b'\x04'), bytes(b'\x05'), bytes(b'\x06'),
-                           bytes(b'\x08'), bytes(b'\x0c'), bytes(b'\x0e')]
+    header_types = {
+        1: "VERSION",
+        2: "HEADERLENGTH",
+        4: "SIGNERNAME",
+        5: "SERIALNUMBER",
+        6: "CANAME",
+        8: "DIGESTALGO",
+        12: "SIGNATURE",
+        14: "FILENAME",
+        15: "TIMESTAMP"
+    }
+
+    header_types_2 = {
+        3: "SIGNERID",
+        7: "SIGNATUREINFO",
+        9: "SIGNATUREALGOINFO",
+        10: "SIGNATUREALGO",
+        11: "SIGNATUREMODULUS",
+    }
+
+    body_types = {
+        1: "RECORDLENGTH",
+        2: "DNSNAME",
+        3: "SUBJECTNAME",
+        4: "FUNCTION",
+        5: "ISSUERNAME",
+        6: "SERIAL NUMBER",
+        7: "PUBLICKEY",
+        8: "SIGNATURE",
+        9: "CERTIFICATE",
+        10: "IPADDRESS"
+    }
+
+    bm_type_header_no_data = copy.deepcopy(header_types_2)
+    bm_type_header_with_data = copy.deepcopy(header_types)
+    bm_type_body = copy.deepcopy(body_types)
+
+    def value_convert(x):
+        try:
+            return x.decode("ascii")
+        except UnicodeDecodeError:
+            return x.hex()
+
+    def byteslist_to_int(byteslist):
+        holder = bytes()
+        for v in byteslist:
+            holder += v
+        return int.from_bytes(holder, byteorder='big')
 
     def process_value_captured(data_dict, field_type):
-        if field_type == bytes(b'\x02'):
-            holder = bytes()
+        if field_type == 1:
+            ver_maj, ver_min = int.from_bytes(data_dict[field_type][0], byteorder="big"), int.from_bytes(
+                data_dict[field_type][1], byteorder="big")
+            print("{}   \   {}   \   {}   \   {}.{}".format(field_type, header_types[field_type],
+                                                            len(data_dict[field_type]),
+                                                            ver_maj, ver_min))
+        elif field_type == 2:
             nonlocal header_length
-            for v in data_dict[field_type]:
-                holder += v
-            value = int.from_bytes(holder, byteorder='big')
-            header_length = value
-            return value
+            header_length = byteslist_to_int(data_dict[field_type])
+            print("{}   \   {}   \   {}   \   {}".format(field_type, header_types[field_type], 2, header_length))
+        else:
+            if field_type in header_types:
+                print("{}   \   {}   \   {}   \   {}".format(field_type, header_types[field_type],
+                                        len(data_dict[field_type]), "".join([value_convert(x) + " " for x in data_dict[field_type]])))
+            elif field_type in header_types_2:
+                print("{}   \   {}   \   {}   \   {}".format(field_type, header_types_2[field_type], 2, byteslist_to_int(data_dict[field_type])))
         return data_dict[field_type]
 
     if os.path.isfile(tlv_file):
         file_size = os.path.getsize(tlv_file)
-        print("This is a file. file size is: {} bytes")
+        print("This is a file. file size is: {} bytes".format(file_size))
+        print("Starting to process the file")
+        print("BYTEPOS   \   TAG   \   LENGTH   \   VALUE")
         bytes_array = []
         int_array = []
 
@@ -38,12 +92,13 @@ def parse_tlv(tlv_file):
             length = 0
             length_holder = []
             while bytes_read != b"" and bytes_index < header_length:
-                #this boolean ensure that we only do 1 action per bytes read from the file
+                # this boolean ensure that we only do 1 action per bytes read from the file
                 work_done = False
+                bytes_read_int = int.from_bytes(bytes_read, byteorder='big')
                 bytes_array.append(bytes_read)
-                int_array.append(int.from_bytes(bytes_read, byteorder='big'))
+                int_array.append(bytes_read_int)
 
-                #start processing the field value once we have the length
+                # start processing the field value once we have the length
                 if length > 0 and not work_done:
                     work_done = True
                     header_data_dict[field_type].append(bytes_read)
@@ -51,33 +106,34 @@ def parse_tlv(tlv_file):
                     if length < 1:
                         header_data_dict[field_type] = process_value_captured(header_data_dict, field_type)
 
-                #start working on getting the field length
+                # start working on getting the field length
                 if length_count > 0 and not work_done:
                     work_done = True
                     length_holder.append(bytes_read)
                     length_count -= 1
-                    #field length of 2 bytes is captured. start processing the length bytes into int
+                    # field length of 2 bytes is captured. start processing the length bytes into int
                     if length_count < 1:
-                        #this is one of the field type that contains just value
+                        # this is one of the field type that contains just value
                         if field_type in bm_type_header_no_data:
                             header_data_dict[field_type] = copy.deepcopy(length_holder)
                             header_data_dict[field_type] = process_value_captured(header_data_dict, field_type)
-                            bm_type_header_no_data.remove(field_type)
+                            bm_type_header_no_data.pop(field_type)
                             length_holder.clear()
                         else:
-                            length = int.from_bytes(length_holder[0] + length_holder[1], byteorder='big')
+                            length = byteslist_to_int(length_holder)
                             length_holder.clear()
 
-                #check if the current bytes is a field type
-                if (bytes_read in bm_type_header_with_data or bytes_read in bm_type_header_no_data) and not work_done:
-                    #length is 2 bytes. set length counter to 2. initiating type list to prep for incoming data
+
+                #process the header part of the file
+                if (bytes_read_int in bm_type_header_with_data or bytes_read_int in bm_type_header_no_data) and not work_done:
+                    # length is 2 bytes. set length counter to 2. initiating type list to prep for incoming data
                     length_count = 2
-                    field_type = bytes_read
+                    field_type = bytes_read_int
                     header_data_dict[field_type] = []
 
-                    #field type found, removing found type from type list...if it's one that has no data content
-                    if bytes_read in bm_type_header_with_data:
-                        bm_type_header_with_data.remove(field_type)
+                    # field type found, removing found type from type list...if it's one that has no data content
+                    if bytes_read_int in bm_type_header_with_data:
+                        bm_type_header_with_data.pop(field_type)
 
                 bytes_read = f.read(1)
                 bytes_index += 1

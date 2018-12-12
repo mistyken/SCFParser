@@ -52,9 +52,11 @@ def parse_tlv(tlv_file):
         """
         if field_type == 1:
             nonlocal next_body
+            nonlocal body_count
             body_length = byteslist_to_int(data_dict[field_type])
             next_body = body_length + bytes_index
-            print("\nStart processing record body")
+            body_count += 1
+            print("\nStart processing record body #{}".format(body_count))
             print("{}   --   {}   --   {}   --   {}".format(field_type,
                                                             body_types[field_type], 2, body_length))
         else:
@@ -109,7 +111,8 @@ def parse_tlv(tlv_file):
         with open(tlv_file, "rb") as file:
             bytes_read = file.read(1)
             header_length = file_size
-            next_body = 0
+            next_body = file_size
+            body_count = 0
             bytes_index = 1
 
             field_type = ''
@@ -127,7 +130,7 @@ def parse_tlv(tlv_file):
                     data_dict[field_type].append(bytes_read)
                     length -= 1
                     if length < 1:
-                        if bytes_index > header_length:
+                        if bytes_index >= header_length:
                             process_value_body(data_dict, field_type)
                         else:
                             process_value_header(data_dict, field_type)
@@ -150,7 +153,7 @@ def parse_tlv(tlv_file):
                             length_holder.clear()
 
                 # process the header part of the file
-                if bytes_read_int in bm_type_body and bytes_index > header_length and not work_done:
+                if bytes_read_int in bm_type_body and bytes_index >= header_length and not work_done:
                     # length is 2 bytes. set length counter to 2. initiating type list to prep for incoming data
                     length_count = 2
                     field_type = bytes_read_int
@@ -173,11 +176,11 @@ def parse_tlv(tlv_file):
                 bytes_read = file.read(1)
                 bytes_index += 1
 
-                if bytes_index > header_length:
+                if bytes_index >= header_length:
                     bm_type_header_no_data.clear()
                     bm_type_header_with_data.clear()
 
-                if bytes_index > next_body:
+                if bytes_index >= next_body:
                     bm_type_body = copy.deepcopy(body_types)
 
 

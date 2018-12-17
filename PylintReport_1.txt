@@ -1,0 +1,157 @@
+************* Module SCFParser
+C: 64, 0: Line too long (109/100) (line-too-long)
+C: 69, 0: Wrong hanging indentation (add 41 spaces).
+                        [value_convert(x) for x in data_dict[field_type]])))
+                        ^                                        | (bad-continuation)
+C: 73, 0: Line too long (105/100) (line-too-long)
+C: 83, 0: Line too long (113/100) (line-too-long)
+C: 88, 0: Wrong hanging indentation (add 41 spaces).
+                        [value_convert(x) for x in data_dict[field_type]])))
+                        ^                                        | (bad-continuation)
+C: 90, 0: Line too long (103/100) (line-too-long)
+C: 91, 0: Line too long (102/100) (line-too-long)
+C:133, 0: Line too long (101/100) (line-too-long)
+C:147, 0: Line too long (112/100) (line-too-long)
+C:152, 0: Line too long (113/100) (line-too-long)
+C:155, 0: Line too long (130/100) (line-too-long)
+C:156, 0: Line too long (112/100) (line-too-long)
+C:161, 0: Line too long (113/100) (line-too-long)
+W: 64, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 64, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 64, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 67, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 67, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 67, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 75, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 75, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 75, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 83, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 83, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 83, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 86, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 86, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 86, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 90, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 90, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 90, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 97, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 97, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+W: 97, 0: Anomalous backslash in string: '\ '. String constant might be missing an r prefix. (anomalous-backslash-in-string)
+C:  1, 0: Module name "SCFParser" doesn't conform to snake_case naming style (invalid-name)
+C:  1, 0: Missing module docstring (missing-docstring)
+C:  6, 0: Missing function docstring (missing-docstring)
+R:  6, 0: Too many local variables (25/15) (too-many-locals)
+C: 44, 4: Argument name "x" doesn't conform to snake_case naming style (invalid-name)
+C: 44, 4: Missing function docstring (missing-docstring)
+C: 50, 4: Missing function docstring (missing-docstring)
+C: 52,12: Variable name "v" doesn't conform to snake_case naming style (invalid-name)
+C: 56, 4: Missing function docstring (missing-docstring)
+E: 62,12: Undefined variable 'body_count' (undefined-variable)
+C: 71, 4: Missing function docstring (missing-docstring)
+C:101,37: Variable name "f" doesn't conform to snake_case naming style (invalid-name)
+E:138,28: Assigning to function call which doesn't return (assignment-from-no-return)
+R:  6, 0: Too many branches (15/12) (too-many-branches)
+R:  6, 0: Too many statements (72/50) (too-many-statements)
+
+
+Report
+======
+104 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |1      |1          |=          |0.00        |100.00   |
++---------+-------+-----------+-----------+------------+---------+
+|class    |0      |0          |=          |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|method   |0      |0          |=          |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|function |5      |5          |=          |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |146    |82.02 |146      |=          |
++----------+-------+------+---------+-----------+
+|docstring |0      |0.00  |0        |=          |
++----------+-------+------+---------+-----------+
+|comment   |10     |5.62  |10       |=          |
++----------+-------+------+---------+-----------+
+|empty     |22     |12.36 |22       |=          |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |0        |=          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |0.000    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |23     |23       |=          |
++-----------+-------+---------+-----------+
+|refactor   |3      |3        |=          |
++-----------+-------+---------+-----------+
+|warning    |21     |21       |=          |
++-----------+-------+---------+-----------+
+|error      |2      |2        |=          |
++-----------+-------+---------+-----------+
+
+
+
+Messages
+--------
+
++------------------------------+------------+
+|message id                    |occurrences |
++==============================+============+
+|anomalous-backslash-in-string |21          |
++------------------------------+------------+
+|line-too-long                 |11          |
++------------------------------+------------+
+|missing-docstring             |6           |
++------------------------------+------------+
+|invalid-name                  |4           |
++------------------------------+------------+
+|bad-continuation              |2           |
++------------------------------+------------+
+|undefined-variable            |1           |
++------------------------------+------------+
+|too-many-statements           |1           |
++------------------------------+------------+
+|too-many-locals               |1           |
++------------------------------+------------+
+|too-many-branches             |1           |
++------------------------------+------------+
+|assignment-from-no-return     |1           |
++------------------------------+------------+
+
+
+
+
+------------------------------------------------------------------
+Your code has been rated at 4.52/10 (previous run: 4.52/10, +0.00)
+

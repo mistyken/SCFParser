@@ -1,0 +1,122 @@
+************* Module SCFParser
+C: 65, 0: Line too long (120/100) (line-too-long)
+C: 75, 0: Line too long (105/100) (line-too-long)
+C: 86, 0: Line too long (104/100) (line-too-long)
+C: 89, 0: Line too long (101/100) (line-too-long)
+C: 92, 0: Line too long (120/100) (line-too-long)
+C: 94, 0: Line too long (106/100) (line-too-long)
+C: 95, 0: Line too long (105/100) (line-too-long)
+C:140, 0: Line too long (101/100) (line-    too-long)
+C:154, 0: Line too long (112/100) (line-too-long)
+C:159, 0: Line too long (113/100) (line-too-long)
+C:162, 0: Line too long (113/100) (line-too-long)
+C:164, 0: Line too long (112/100) (line-too-long)
+C:169, 0: Line too long (113/100) (line-too-long)
+C:  1, 0: Module name "SCFParser" doesn't conform to snake_case naming style (invalid-name)
+C:  1, 0: Missing module docstring (missing-docstring)
+R:  7, 0: Too many local variables (22/15) (too-many-locals)
+R:  7, 0: Too many branches (15/12) (too-many-branches)
+R:  7, 0: Too many statements (74/50) (too-many-statements)
+
+
+Report
+======
+92 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |1      |1          |=          |0.00        |100.00   |
++---------+-------+-----------+-----------+------------+---------+
+|class    |0      |0          |=          |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|method   |0      |0          |=          |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|function |3      |3          |=          |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+External dependencies
+---------------------
+::
+
+    parser_util (SCFParser)
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |137    |73.26 |NC       |NC         |
++----------+-------+------+---------+-----------+
+|docstring |19     |10.16 |NC       |NC         |
++----------+-------+------+---------+-----------+
+|comment   |10     |5.35  |NC       |NC         |
++----------+-------+------+---------+-----------+
+|empty     |21     |11.23 |NC       |NC         |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |0        |=          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |0.000    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |15     |15       |=          |
++-----------+-------+---------+-----------+
+|refactor   |3      |3        |=          |
++-----------+-------+---------+-----------+
+|warning    |0      |0        |=          |
++-----------+-------+---------+-----------+
+|error      |0      |0        |=          |
++-----------+-------+---------+-----------+
+
+
+
+Messages
+--------
+
++--------------------+------------+
+|message id          |occurrences |
++====================+============+
+|line-too-long       |13          |
++--------------------+------------+
+|too-many-statements |1           |
++--------------------+------------+
+|too-many-locals     |1           |
++--------------------+------------+
+|too-many-branches   |1           |
++--------------------+------------+
+|missing-docstring   |1           |
++--------------------+------------+
+|invalid-name        |1           |
++--------------------+------------+
+
+
+
+
+------------------------------------------------------------------
+Your code has been rated at 8.04/10 (previous run: 8.04/10, +0.00)
+
